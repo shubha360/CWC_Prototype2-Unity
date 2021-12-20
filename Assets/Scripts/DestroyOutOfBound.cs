@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Destroys the unneseccary objects
 public class DestroyOutOfBound : MonoBehaviour
 {
     private float topBound = 30;
@@ -24,7 +25,7 @@ public class DestroyOutOfBound : MonoBehaviour
             transform.position.x < leftBound ||
             transform.position.x > rightBound)
         {   
-
+            // Player's live decreases if she misses and the food is wasted.
             if (gameObject.name.StartsWith("Food"))
             {
                 PlayerController.lives--;

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// Makes the animals move forward
 public class MoveForward : MonoBehaviour
 {
     public float speed;

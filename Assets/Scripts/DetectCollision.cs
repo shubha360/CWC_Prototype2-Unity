@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Detects the collsisions and handles the game accordingly.
+
 public class DetectCollision : MonoBehaviour
 {
 
@@ -30,7 +32,8 @@ public class DetectCollision : MonoBehaviour
                 Debug.Log("Score: " + PlayerController.score + ", Lives: " + PlayerController.lives);
             }
 
-        } else
+        } 
+        else // Player is not involved in the collision. Collision between an animal and food.
         {
 
             if (gameObject.name.StartsWith("Food"))
@@ -42,7 +45,6 @@ public class DetectCollision : MonoBehaviour
             {
                 Debug.Log("Score: " + PlayerController.score + ", Lives: " + PlayerController.lives);
             }
-
 
             Destroy(gameObject);
             Destroy(other.gameObject);
