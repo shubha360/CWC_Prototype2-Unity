@@ -9,18 +9,17 @@ public class PlayerController : MonoBehaviour
 
     private float speed = 15;
     private float xRange = 15;
-    private float zRange = 10;
 
-    public static int score = 0;
-    public static int lives = 3;
-
+    private float zMin = -1.5f;
+    private float zMax = 15.5f;
 
     public GameObject projectilePrefab;
+
+    public Transform projectileSpawnPoint;
 
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Score at Start: " + PlayerController.score + ", Lives at Start: " + PlayerController.lives);
     }
 
     // Update is called once per frame
@@ -28,7 +27,10 @@ public class PlayerController : MonoBehaviour
     {
 
         horizontalInput = Input.GetAxis("Horizontal");
+        transform.Translate(Vector3.right * Time.deltaTime * horizontalInput * speed);
+
         verticalInput = Input.GetAxis("Vertical");
+        transform.Translate(Vector3.forward * Time.deltaTime * verticalInput * speed);
 
         if (transform.position.x < -xRange)
         {
@@ -40,23 +42,20 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
         }
 
-        if (transform.position.z < 0)
+        if (transform.position.z < zMin)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+            transform.position = new Vector3(transform.position.x, transform.position.y, zMin);
         }
 
-        if (transform.position.z > zRange)
+        if (transform.position.z > zMax)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, zRange);
+            transform.position = new Vector3(transform.position.x, transform.position.y, zMax);
         }
-
-        transform.Translate(Vector3.right * Time.deltaTime * horizontalInput * speed);
-        transform.Translate(Vector3.forward* Time.deltaTime * verticalInput * speed);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Vector3 projectilePosition = new Vector3(transform.position.x, 0, transform.position.z);
-            Instantiate(projectilePrefab, projectilePosition, projectilePrefab.transform.rotation);
+            Instantiate(projectilePrefab, projectileSpawnPoint.position, projectilePrefab.transform.rotation);
         }
     }
 }

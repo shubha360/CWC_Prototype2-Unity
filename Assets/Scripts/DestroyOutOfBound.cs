@@ -10,10 +10,12 @@ public class DestroyOutOfBound : MonoBehaviour
     private float leftBound = -30;
     private float rightBound = 30;
 
+    private GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -23,14 +25,8 @@ public class DestroyOutOfBound : MonoBehaviour
             transform.position.z < lowerBound || 
             transform.position.x < leftBound ||
             transform.position.x > rightBound)
-        {   
-
-            if (gameObject.name.StartsWith("Food"))
-            {
-                PlayerController.lives--;
-                Debug.Log("Score: " + PlayerController.score + ", Lives: " + PlayerController.lives);
-            }
-
+        {
+            gameManager.addLives(-1);
             Destroy(gameObject);
         }
     }
