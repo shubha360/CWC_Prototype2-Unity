@@ -22,7 +22,7 @@ public class DetectCollision : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-    {   
+    {
         if (other.name == "Player")
         {
             PlayerController.lives--;
